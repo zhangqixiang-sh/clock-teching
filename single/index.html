@@ -1467,7 +1467,8 @@ const LearnModule = {
             if (!this._rafRunning) return;
             if (!startTime) startTime = timestamp;
             const elapsed = (timestamp - startTime) / 1000;
-            const mAngle = (elapsed * M_SPEED) % 360;
+            // Don't modulo mAngle - allow continuous rotation for smooth hour hand movement
+            const mAngle = elapsed * M_SPEED;
             this.clock.minuteGroup.style.transform = `rotate(${mAngle}deg)`;
             this.clock.hourGroup.style.transform = `rotate(${mAngle / 12}deg)`;
             requestAnimationFrame(animate);

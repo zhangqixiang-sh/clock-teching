@@ -222,7 +222,7 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
       </div>
 
       <button
-        className="btn btn-accent"
+        className="btn btn-primary"
         style={{ marginTop: '12px', fontSize: '20px', padding: '16px 48px' }}
         onClick={startQuiz}
       >
@@ -338,7 +338,7 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
           }}>
             {t('quiz.back')}
           </button>
-          <button className="btn btn-accent" onClick={startQuiz}>
+          <button className="btn btn-primary" onClick={startQuiz}>
             {t('quiz.again')}
           </button>
         </div>

@@ -43,9 +43,9 @@ html, body {
   --lavender-light: #E5DDF0;
   
   /* Clock Colors - 时针分针明显区分 */
-  --clock-hour: #4A5568;      /* 深灰蓝色 - 时针 */
+  --clock-hour: #4A5568;      /* 灰色 - 时针 */
   --clock-minute: #8FB996;    /* 鼠尾草绿 - 分针 */
-  --clock-second: #FF8B7B;    /* 珊瑚色 - 秒针 */
+  --clock-second: #FF8B7B;    /* 红色 - 秒针 */
   --clock-face: var(--warm-white);
   --clock-rim: #4A4A4A;
   
@@ -434,7 +434,7 @@ body {
 }
 
 .step-dot.active::after {
-  border-color: var(--coral-light);
+  border-color: transparent;
 }
 
 .step-dot.done {
@@ -565,6 +565,7 @@ body {
   box-shadow: var(--shadow-md);
   border: 2px solid rgba(255, 139, 123, 0.1);
   position: relative;
+  font-family: 'Nunito', -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
 .digital-time::before {
@@ -579,12 +580,13 @@ body {
 
 .time-words {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--sage-dark);
   text-align: center;
   padding: 12px 24px;
   background: var(--sage-light);
   border-radius: var(--radius-full);
+  font-family: 'Nunito', -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
 .practice-buttons {
@@ -668,15 +670,15 @@ body {
 }
 
 .quiz-mode-tab:hover {
-  border-color: var(--honey);
-  color: var(--text-primary);
+  border-color: var(--coral-light);
+  color: var(--coral);
 }
 
 .quiz-mode-tab.active {
-  border-color: var(--honey);
-  background: linear-gradient(135deg, var(--honey) 0%, var(--honey-dark) 100%);
-  color: #3D3D3D;
-  box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
+  border-color: var(--coral);
+  background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+  color: #FFF;
+  box-shadow: 0 4px 12px rgba(255, 139, 123, 0.3);
 }
 
 .quiz-body {
@@ -789,7 +791,7 @@ body {
 .quiz-target-time {
   font-size: 32px;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--honey) 0%, var(--honey-dark) 100%);
+  background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -865,7 +867,7 @@ body {
   left: 0;
   right: 0;
   height: 6px;
-  background: linear-gradient(90deg, var(--coral) 0%, var(--honey) 50%, var(--sage) 100%);
+  background: linear-gradient(90deg, var(--coral) 0%, var(--coral-dark) 100%);
 }
 
 .quiz-setup h2 {
