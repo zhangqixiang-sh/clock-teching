@@ -180,9 +180,10 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
 
   const renderSetup = () => (
     <div className="quiz-setup">
+      <div className="quiz-setup-icon">🎯</div>
       <h2>{t('quiz.title')}</h2>
 
-      <div style={{ fontSize: '16px', color: 'var(--color-text-light)', marginTop: '8px' }}>
+      <div style={{ fontSize: '16px', color: 'var(--text-secondary)', marginTop: '4px', fontWeight: 600 }}>
         {t('quiz.selectMode')}
       </div>
 
@@ -201,7 +202,7 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
         ))}
       </div>
 
-      <div style={{ fontSize: '16px', color: 'var(--color-text-light)', marginTop: '12px' }}>
+      <div style={{ fontSize: '16px', color: 'var(--text-secondary)', marginTop: '8px', fontWeight: 600 }}>
         {t('quiz.difficulty')}
       </div>
 
@@ -222,7 +223,7 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
 
       <button
         className="btn btn-accent"
-        style={{ marginTop: '20px', fontSize: '20px', padding: '14px 40px' }}
+        style={{ marginTop: '12px', fontSize: '20px', padding: '16px 48px' }}
         onClick={startQuiz}
       >
         {t('quiz.start')}

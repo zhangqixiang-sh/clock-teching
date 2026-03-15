@@ -13,12 +13,12 @@ export const translations: Record<string, Record<Language, string>> = {
   // Learn steps
   'learn.s1.title': { zh: '认识钟面', en: 'The Clock Face' },
   'learn.s1.text': { zh: '这是一个钟面！它是圆形的，上面有1到12这12个数字，均匀地排列在一圈上。最上面是12，最下面是6，右边是3，左边是9。钟面上还有很多小刻度线，一共有60条小格子。', en: "This is a clock face! It's round with numbers 1 to 12 arranged in a circle. 12 is at the top, 6 at the bottom, 3 on the right, and 9 on the left. There are also 60 small tick marks around the edge." },
-  'learn.s2.title': { zh: '时针 — 短粗的蓝色指针', en: 'Hour Hand — Short Blue One' },
-  'learn.s2.text': { zh: '看，这根短短的、粗粗的蓝色指针叫做"时针"。它走得最慢，它指向哪个数字，就表示现在是几点钟。比如它指向3，就是3点。时针走完一圈要12个小时呢！', en: 'See this short, thick blue pointer? It\'s called the "hour hand". It moves the slowest. The number it points to tells us what hour it is. For example, if it points to 3, it\'s 3 o\'clock. It takes 12 hours to go all the way around!' },
+  'learn.s2.title': { zh: '时针 — 短粗的蓝灰色指针', en: 'Hour Hand — Short Blue-Gray One' },
+  'learn.s2.text': { zh: '看，这根短短的、粗粗的蓝灰色指针叫做"时针"。它走得最慢，它指向哪个数字，就表示现在是几点钟。比如它指向3，就是3点。时针走完一圈要12个小时呢！', en: 'See this short, thick blue-gray pointer? It\'s called the "hour hand". It moves the slowest. The number it points to tells us what hour it is. For example, if it points to 3, it\'s 3 o\'clock. It takes 12 hours to go all the way around!' },
   'learn.s3.title': { zh: '分针 — 细长的绿色指针', en: 'Minute Hand — Long Green One' },
   'learn.s3.text': { zh: '这根长长的绿色指针叫做"分针"。它比时针走得快。分针指向12的时候表示"整点"，指向6表示"30分"（半点）。分针走完一圈是60分钟，也就是1个小时，这时候时针就会走一格。', en: 'This long green pointer is the "minute hand". It moves faster than the hour hand. When it points to 12, it means "o\'clock" (exact hour). When it points to 6, it means 30 minutes (half past). One full turn = 60 minutes = 1 hour!' },
-  'learn.s4.title': { zh: '秒针 — 最细的红色指针', en: 'Second Hand — Thin Red One' },
-  'learn.s4.text': { zh: '最细的那根红色指针叫做"秒针"，它跑得最快！你看它一直在走。秒针走一圈是60秒，也就是1分钟。当秒针走完一圈的时候，分针就会往前走一小格。', en: 'The thinnest red pointer is the "second hand" — it\'s the fastest! Watch it go! One full turn = 60 seconds = 1 minute. Every time the second hand completes a turn, the minute hand moves forward one tick.' },
+  'learn.s4.title': { zh: '秒针 — 最细的珊瑚色指针', en: 'Second Hand — Thin Coral One' },
+  'learn.s4.text': { zh: '最细的那根珊瑚色指针叫做"秒针"，它跑得最快！你看它一直在走。秒针走一圈是60秒，也就是1分钟。当秒针走完一圈的时候，分针就会往前走一小格。', en: 'The thinnest coral pointer is the "second hand" — it\'s the fastest! Watch it go! One full turn = 60 seconds = 1 minute. Every time the second hand completes a turn, the minute hand moves forward one tick.' },
   'learn.s5.title': { zh: '时间的秘密', en: 'Time Secrets' },
   'learn.s5.text': { zh: '⏱️ 60秒 = 1分钟（秒针走一圈）\n⏱️ 60分钟 = 1小时（分针走一圈）\n⏱️ 12小时 = 时针走一圈\n⏱️ 24小时 = 1天（时针走两圈）\n\n所以一天里，时针要转两圈，上午一圈，下午一圈！', en: '⏱️ 60 seconds = 1 minute (second hand goes around once)\n⏱️ 60 minutes = 1 hour (minute hand goes around once)\n⏱️ 12 hours = hour hand goes around once\n⏱️ 24 hours = 1 day (hour hand goes around TWICE)\n\nSo in one day, the hour hand makes two trips around the clock!' },
   // Quiz

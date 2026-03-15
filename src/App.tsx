@@ -37,19 +37,19 @@ function App() {
             className={`nav-tab ${currentModule === 'learn' ? 'active' : ''}`}
             onClick={() => switchModule('learn')}
           >
-            {t('nav.learn')}
+            <span>{t('nav.learn')}</span>
           </button>
           <button
             className={`nav-tab ${currentModule === 'practice' ? 'active' : ''}`}
             onClick={() => switchModule('practice')}
           >
-            {t('nav.practice')}
+            <span>{t('nav.practice')}</span>
           </button>
           <button
             className={`nav-tab ${currentModule === 'quiz' ? 'active' : ''}`}
             onClick={() => switchModule('quiz')}
           >
-            {t('nav.quiz')}
+            <span>{t('nav.quiz')}</span>
           </button>
         </div>
         <div className="nav-right">

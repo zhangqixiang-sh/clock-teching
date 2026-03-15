@@ -88,7 +88,8 @@ export const LearnModule: React.FC<LearnModuleProps> = ({ t, soundManager }) => 
             if (!rafRunningRef.current) return;
             if (!startTime) startTime = timestamp;
             const elapsed = (timestamp - startTime) / 1000;
-            const mAngle = (elapsed * M_SPEED) % 360;
+            // Don't modulo mAngle - allow continuous rotation for smooth hour hand movement
+            const mAngle = elapsed * M_SPEED;
             if (minuteGroup) {
               minuteGroup.style.transform = `rotate(${mAngle}deg)`;
             }

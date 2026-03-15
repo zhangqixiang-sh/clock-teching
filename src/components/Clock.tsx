@@ -65,15 +65,15 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
 
     if (hourGroupRef.current) {
       hourGroupRef.current.style.transform = `rotate(${hAngle}deg)`;
-      hourGroupRef.current.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
+      hourGroupRef.current.style.transition = animate ? 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none';
     }
     if (minuteGroupRef.current) {
       minuteGroupRef.current.style.transform = `rotate(${mAngle}deg)`;
-      minuteGroupRef.current.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
+      minuteGroupRef.current.style.transition = animate ? 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none';
     }
     if (secondGroupRef.current) {
       secondGroupRef.current.style.transform = `rotate(${sAngle}deg)`;
-      secondGroupRef.current.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
+      secondGroupRef.current.style.transition = animate ? 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none';
     }
   }, []);
 
@@ -127,8 +127,9 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
   const highlightNumber = useCallback((index: number | null) => {
     numberRefs.current.forEach((el, i) => {
       if (el) {
-        el.setAttribute('fill', i === index ? 'var(--color-accent)' : 'var(--color-clock-rim)');
+        el.setAttribute('fill', i === index ? 'var(--coral)' : 'var(--text-primary)');
         el.setAttribute('font-size', i === index ? '34' : '28');
+        el.style.fontWeight = i === index ? '900' : '700';
       }
     });
   }, []);
@@ -137,8 +138,9 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
     highlight(null);
     numberRefs.current.forEach(el => {
       if (el) {
-        el.setAttribute('fill', 'var(--color-clock-rim)');
+        el.setAttribute('fill', 'var(--text-primary)');
         el.setAttribute('font-size', '28');
+        el.style.fontWeight = '700';
       }
     });
   }, [highlight]);
@@ -361,7 +363,7 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
     for (let i = 0; i < 60; i++) {
       const angle = i * 6;
       const isHour = i % 5 === 0;
-      const r1 = isHour ? 160 : 168;
+      const r1 = isHour ? 150 : 158;
       const r2 = 175;
       const rad = angle * Math.PI / 180;
       const x1 = cx + r1 * Math.sin(rad);
@@ -375,9 +377,10 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
           y1={y1}
           x2={x2}
           y2={y2}
-          stroke={isHour ? 'var(--color-clock-rim)' : '#CCC'}
-          strokeWidth={isHour ? 3 : 1.5}
+          className={isHour ? 'clock-tick major' : 'clock-tick'}
           strokeLinecap="round"
+          stroke={isHour ? 'var(--clock-rim)' : 'rgba(74, 74, 74, 0.35)'}
+          strokeWidth={isHour ? 4 : 1.5}
         />
       );
     }
@@ -390,7 +393,7 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
     for (let i = 1; i <= 12; i++) {
       const angle = i * 30;
       const rad = angle * Math.PI / 180;
-      const r = 145;
+      const r = 135;
       const x = cx + r * Math.sin(rad);
       const y = cy - r * Math.cos(rad);
       numbers.push(
@@ -401,11 +404,12 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
           y={y}
           textAnchor="middle"
           dominantBaseline="central"
-          fontSize="28"
-          fontWeight="700"
-          fontFamily="-apple-system, PingFang SC, Helvetica Neue, sans-serif"
-          fill="var(--color-clock-rim)"
+          fontSize="32"
+          fontWeight="600"
+          fontFamily="Nunito, -apple-system, PingFang SC, sans-serif"
+          fill="var(--text-primary)"
           className="clock-number"
+          style={{ textShadow: '0 1px 2px rgba(0,0,0,0.05)' }}
         >
           {i}
         </text>
@@ -423,47 +427,88 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
         style={{ width: '100%', height: '100%', display: 'block' }}
       >
         <defs>
-          <filter id={filterIdRef.current} x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
-            <feOffset dx="0" dy="3" result="shadow" />
-            <feFlood floodColor="rgba(0,0,0,0.12)" />
+          <filter id={filterIdRef.current} x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="8" />
+            <feOffset dx="0" dy="6" result="shadow" />
+            <feFlood floodColor="rgba(139, 115, 96, 0.2)" />
             <feComposite in2="shadow" operator="in" />
             <feMerge>
               <feMergeNode />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          
+          {/* Gradient for clock rim */}
+          <linearGradient id="rimGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#5A5A5A" />
+            <stop offset="50%" stopColor="#3D3D3D" />
+            <stop offset="100%" stopColor="#2D2D2D" />
+          </linearGradient>
+          
+          {/* Inner shadow for depth */}
+          <radialGradient id="innerShadow" cx="50%" cy="50%" r="50%">
+            <stop offset="60%" stopColor="transparent" />
+            <stop offset="80%" stopColor="rgba(0,0,0,0.02)" />
+            <stop offset="100%" stopColor="rgba(0,0,0,0.08)" />
+          </radialGradient>
+          
+          {/* Subtle texture for clock face */}
+          <pattern id="subtleTexture" width="10" height="10" patternUnits="userSpaceOnUse">
+            <circle cx="5" cy="5" r="0.5" fill="rgba(0,0,0,0.02)" />
+          </pattern>
+          
+          {/* Gradient for clock face */}
+          <linearGradient id="faceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFFBF7" />
+            <stop offset="100%" stopColor="#F8F2EA" />
+          </linearGradient>
         </defs>
 
-        {/* Clock face background */}
+        {/* Clock face background with soft shadow and subtle texture */}
         <circle
           cx={cx}
           cy={cy}
           r={190}
-          fill="#FFF"
-          stroke="#E0E0E0"
-          strokeWidth={2}
+          fill="url(#faceGradient)"
           filter={`url(#${filterIdRef.current})`}
         />
 
-        {/* Rim */}
+        {/* Rim with enhanced gradient */}
         <circle
           cx={cx}
           cy={cy}
-          r={185}
-          fill="var(--color-clock-face)"
-          stroke="var(--color-clock-rim)"
-          strokeWidth={5}
+          r={188}
+          fill="none"
+          stroke="url(#rimGradient)"
+          strokeWidth={10}
         />
 
-        {/* Inner decorative circle */}
+        {/* Inner decorative ring */}
         <circle
           cx={cx}
           cy={cy}
-          r={178}
+          r={180}
           fill="none"
-          stroke="#F0F0F0"
+          stroke="var(--cream-dark)"
           strokeWidth={1}
+        />
+        
+        {/* Inner shadow overlay for depth */}
+        <circle
+          cx={cx}
+          cy={cy}
+          r={180}
+          fill="url(#innerShadow)"
+          pointerEvents="none"
+        />
+        
+        {/* Subtle texture overlay */}
+        <circle
+          cx={cx}
+          cy={cy}
+          r={180}
+          fill="url(#subtleTexture)"
+          pointerEvents="none"
         />
 
         {/* Tick marks */}
@@ -476,16 +521,24 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
         <g
           ref={hourGroupRef}
           className="clock-hand hour-hand"
-          style={{ color: 'var(--color-hour)', transformOrigin: `${cx}px ${cy}px` }}
+          style={{ color: 'var(--clock-hour)', transformOrigin: `${cx}px ${cy}px` }}
         >
           <line
             x1={cx}
             y1={cy + 20}
             x2={cx}
-            y2={cy - 95}
-            stroke="var(--color-hour)"
-            strokeWidth={10}
+            y2={cy - 85}
+            stroke="var(--clock-hour)"
+            strokeWidth={14}
             strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Hand tip detail */}
+          <circle
+            cx={cx}
+            cy={cy - 85}
+            r={6}
+            fill="var(--clock-hour)"
           />
         </g>
 
@@ -493,16 +546,24 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
         <g
           ref={minuteGroupRef}
           className="clock-hand minute-hand"
-          style={{ color: 'var(--color-minute)', transformOrigin: `${cx}px ${cy}px` }}
+          style={{ color: 'var(--clock-minute)', transformOrigin: `${cx}px ${cy}px` }}
         >
           <line
             x1={cx}
-            y1={cy + 20}
+            y1={cy + 25}
             x2={cx}
-            y2={cy - 135}
-            stroke="var(--color-minute)"
-            strokeWidth={7}
+            y2={cy - 125}
+            stroke="var(--clock-minute)"
+            strokeWidth={10}
             strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Hand tip detail */}
+          <circle
+            cx={cx}
+            cy={cy - 125}
+            r={5}
+            fill="var(--clock-minute)"
           />
         </g>
 
@@ -511,23 +572,24 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
           <g
             ref={secondGroupRef}
             className="clock-hand second-hand"
-            style={{ color: 'var(--color-second)', transformOrigin: `${cx}px ${cy}px` }}
+            style={{ color: 'var(--clock-second)', transformOrigin: `${cx}px ${cy}px` }}
           >
             <line
               x1={cx}
               y1={cy + 30}
               x2={cx}
-              y2={cy - 150}
-              stroke="var(--color-second)"
-              strokeWidth={2.5}
+              y2={cy - 145}
+              stroke="var(--clock-second)"
+              strokeWidth={3}
               strokeLinecap="round"
             />
           </g>
         )}
 
-        {/* Center dot */}
-        <circle cx={cx} cy={cy} r={8} fill="var(--color-clock-rim)" />
-        <circle cx={cx} cy={cy} r={4} fill="#FFF" />
+        {/* Center dot with coral accent */}
+        <circle cx={cx} cy={cy} r={12} fill="var(--clock-rim)" />
+        <circle cx={cx} cy={cy} r={8} fill="var(--coral)" />
+        <circle cx={cx} cy={cy} r={4} fill="var(--warm-white)" />
 
         {/* Touch area */}
         {interactive && (
