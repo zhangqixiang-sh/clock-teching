@@ -18,7 +18,7 @@ export interface ClockOptions {
 
 export type HandType = 'hour' | 'minute' | 'second' | null;
 
-export type Difficulty = 'easy' | 'medium' | 'hard' | 'expert';
+export type Difficulty = 'medium' | 'hard' | 'expert' | 'minute';
 
 export type QuizMode = 'A' | 'B'; // A = read clock, B = set clock
 

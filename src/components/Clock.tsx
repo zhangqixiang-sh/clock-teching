@@ -183,10 +183,10 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
     get secondGroup() { return secondGroupRef.current; },
   }), [setTime, getTime, setDragging, highlight, highlightNumber, clearHighlights, startRealtime, stopRealtime]);
 
-  // Initialize time
+  // Sync time when props change
   useEffect(() => {
     setTime(hours, minutes, seconds);
-  }, []);
+  }, [hours, minutes, seconds, setTime]);
 
   // Update snap setting
   useEffect(() => {
@@ -437,26 +437,26 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-          
+
           {/* Gradient for clock rim */}
           <linearGradient id="rimGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#5A5A5A" />
             <stop offset="50%" stopColor="#3D3D3D" />
             <stop offset="100%" stopColor="#2D2D2D" />
           </linearGradient>
-          
+
           {/* Inner shadow for depth */}
           <radialGradient id="innerShadow" cx="50%" cy="50%" r="50%">
             <stop offset="60%" stopColor="transparent" />
             <stop offset="80%" stopColor="rgba(0,0,0,0.02)" />
             <stop offset="100%" stopColor="rgba(0,0,0,0.08)" />
           </radialGradient>
-          
+
           {/* Subtle texture for clock face */}
           <pattern id="subtleTexture" width="10" height="10" patternUnits="userSpaceOnUse">
             <circle cx="5" cy="5" r="0.5" fill="rgba(0,0,0,0.02)" />
           </pattern>
-          
+
           {/* Gradient for clock face */}
           <linearGradient id="faceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#FFFBF7" />
@@ -492,7 +492,7 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
           stroke="var(--cream-dark)"
           strokeWidth={1}
         />
-        
+
         {/* Inner shadow overlay for depth */}
         <circle
           cx={cx}
@@ -501,7 +501,7 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
           fill="url(#innerShadow)"
           pointerEvents="none"
         />
-        
+
         {/* Subtle texture overlay */}
         <circle
           cx={cx}

@@ -35,7 +35,7 @@ export const translations: Record<string, Record<Language, string>> = {
   'quiz.correct': { zh: '答对了！', en: 'Correct!' },
   'quiz.wrong': { zh: '再想想哦～', en: 'Try again~' },
   'quiz.answer': { zh: '正确答案是：', en: 'The answer is: ' },
-  'quiz.diff.easy': { zh: '整点', en: 'Hours' },
+  'quiz.diff.minute': { zh: '1分钟', en: '1-min' },
   'quiz.diff.medium': { zh: '半点', en: 'Half' },
   'quiz.diff.hard': { zh: '刻钟', en: 'Quarter' },
   'quiz.diff.expert': { zh: '5分钟', en: '5-min' },

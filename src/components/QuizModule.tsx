@@ -20,7 +20,7 @@ const TOTAL_QUESTIONS = 10;
 
 export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang }) => {
   const [mode, setMode] = useState<QuizMode>('A');
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy');
+  const [difficulty, setDifficulty] = useState<Difficulty>('medium');
   const [quizState, setQuizState] = useState<QuizState>('setup');
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQ, setCurrentQ] = useState(0);
@@ -36,9 +36,6 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
     const h = Math.floor(Math.random() * 12) + 1;
     let m = 0;
     switch (difficulty) {
-      case 'easy':
-        m = 0;
-        break;
       case 'medium':
         m = Math.random() < 0.5 ? 0 : 30;
         break;
@@ -47,6 +44,9 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
         break;
       case 'expert':
         m = Math.floor(Math.random() * 12) * 5;
+        break;
+      case 'minute':
+        m = Math.floor(Math.random() * 60);
         break;
     }
     return { h, m };
@@ -76,17 +76,18 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
       const rh = Math.floor(Math.random() * 12) + 1;
       let rm: number;
       switch (difficulty) {
-        case 'easy':
-          rm = 0;
-          break;
         case 'medium':
           rm = Math.random() < 0.5 ? 0 : 30;
           break;
         case 'hard':
           rm = [0, 15, 30, 45][Math.floor(Math.random() * 4)];
           break;
-        default:
+        case 'expert':
           rm = Math.floor(Math.random() * 12) * 5;
+          break;
+        case 'minute':
+          rm = Math.floor(Math.random() * 60);
+          break;
       }
       distractors.add(`${rh}:${String(rm).padStart(2, '0')}`);
     }
@@ -207,7 +208,7 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
       </div>
 
       <div className="difficulty-selector">
-        {(['easy', 'medium', 'hard', 'expert'] as Difficulty[]).map(d => (
+        {(['medium', 'hard', 'expert', 'minute'] as Difficulty[]).map(d => (
           <button
             key={d}
             className={`diff-btn ${difficulty === d ? 'active' : ''}`}
@@ -252,15 +253,14 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
             {options.map(opt => (
               <button
                 key={opt.key}
-                className={`quiz-option ${
-                  answered
-                    ? opt.h === q.h && opt.m === q.m
-                      ? 'correct'
-                      : selectedAnswer === opt.key
-                        ? 'wrong'
-                        : ''
-                    : ''
-                } ${answered ? 'disabled' : ''}`}
+                className={`quiz-option ${answered
+                  ? opt.h === q.h && opt.m === q.m
+                    ? 'correct'
+                    : selectedAnswer === opt.key
+                      ? 'wrong'
+                      : ''
+                  : ''
+                  } ${answered ? 'disabled' : ''}`}
                 onClick={() => handleModeAAnswer(opt)}
                 disabled={answered}
               >

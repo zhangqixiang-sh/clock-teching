@@ -4,6 +4,7 @@ node_modules
 .pnp.js
 
 .qoder
+.trae
 package-lock.json
 
 # Build outputs
