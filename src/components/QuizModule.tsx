@@ -285,7 +285,7 @@ export const QuizModule: React.FC<QuizModuleProps> = ({ t, soundManager, lang })
             showSecond={false}
             hours={12}
             minutes={0}
-            snapTo5={true}
+            snapInterval={difficulty === 'minute' ? 1 : 5}
           />
         </div>
         <div className="quiz-right-panel">

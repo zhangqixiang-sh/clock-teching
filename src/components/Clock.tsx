@@ -3,7 +3,7 @@ import type { TimeState, ClockOptions, HandType } from '../types';
 
 interface ClockProps extends ClockOptions {
   onTimeChange?: (time: TimeState) => void;
-  snapTo5?: boolean;
+  snapInterval?: number;
   highlightedHand?: HandType;
   highlightedNumber?: number;
   dragging?: boolean;
@@ -31,7 +31,7 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
   minutes = 0,
   seconds = 0,
   onTimeChange,
-  snapTo5 = true,
+  snapInterval = 5,
   highlightedHand,
   highlightedNumber,
   dragging: externalDragging = false,
@@ -44,7 +44,7 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
   const totalDeltaRef = useRef(0);
   const startHoursRef = useRef(0);
   const startMinutesRef = useRef(0);
-  const snapEnabledRef = useRef(snapTo5);
+  const snapIntervalRef = useRef(snapInterval);
   const numberRefs = useRef<(SVGTextElement | null)[]>([]);
   const hourGroupRef = useRef<SVGGElement>(null);
   const minuteGroupRef = useRef<SVGGElement>(null);
@@ -190,8 +190,8 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
 
   // Update snap setting
   useEffect(() => {
-    snapEnabledRef.current = snapTo5;
-  }, [snapTo5]);
+    snapIntervalRef.current = snapInterval;
+  }, [snapInterval]);
 
   // Handle external highlights
   useEffect(() => {
@@ -287,11 +287,12 @@ export const Clock = forwardRef<ClockRef, ClockProps>(({
       const rawMinutes = startMinutesRef.current + totalDeltaRef.current / 6;
       let finalMinutes = rawMinutes;
 
-      // Snap to nearest 5-minute mark using continuous value.
+      // Snap to nearest minute mark based on snapInterval.
       // This keeps the snapped angle within ±15° of the current angle,
       // ensuring a smooth CSS transition with no wild spinning.
-      if (snapEnabledRef.current) {
-        finalMinutes = Math.round(rawMinutes / 5) * 5;
+      const interval = snapIntervalRef.current;
+      if (interval > 0) {
+        finalMinutes = Math.round(rawMinutes / interval) * interval;
       }
 
       // Re-enable transitions for the snap animation, then set time.
